@@ -1,5 +1,5 @@
 import { User } from "@modules/user/infra/entities/User";
-import { IUserRepository } from "../IUserRepository";
+import { IUserRepository } from "@modules/user/repositories/IUserRepository";
 
 export class UserRepository implements IUserRepository{
 

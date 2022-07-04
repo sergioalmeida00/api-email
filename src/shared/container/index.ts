@@ -1,6 +1,6 @@
 import { container } from "tsyringe";
 import {IUserRepository} from "@modules/user/repositories/IUserRepository";
-import {UserRepository} from "@modules/user/infra/repositories/UserRepository";
+import {UserRepository} from "@modules/user/infra/repositories/implementations/UserRepository";
 import { IMailProvider } from "@shared/providers/IMailProvider";
 import { MailtrapMailProvider } from "@shared/providers/implementations/MailtrapMailProvider";
 

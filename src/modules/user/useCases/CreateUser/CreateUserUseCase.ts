@@ -15,15 +15,14 @@ export class CreateUserUseCase{
     ){}
 
     async execute(data:ICreateUserRequestDTO){
-
         const userAlreadyExists = await this.userRepository.findByEmail(data.email); 
-
+        console.log(data)
+        
         if(userAlreadyExists){
             throw new Error("User already exists!!");
         }
-
         const user = new User(data);
-
+     
         await this.userRepository.save(user);
 
         this.mailProvider.sendMail({
