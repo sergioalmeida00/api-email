@@ -1,7 +1,8 @@
 import {User} from "@modules/user/infra/entities/User";
+import { ICreateUserRequestDTO } from "../dtos/CreateUserDto";
 
 interface IUserRepository{
     findByEmail(email:string): Promise<User>;
-    save(user:User): Promise<void>;
+    create(user:ICreateUserRequestDTO): Promise<void>;
 }
 export {IUserRepository}
