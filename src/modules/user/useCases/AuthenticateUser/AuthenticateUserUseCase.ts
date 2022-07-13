@@ -1,8 +1,10 @@
 import { IUserRepository } from '@modules/user/repositories/IUserRepository';
+import { AppError } from '@shared/infra/http/errors/AppError';
 import {compare} from 'bcryptjs';
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from 'tsyringe';
 import authConfig from '../../../../config/auth';
+
 
 interface IRequest{
     email:string;
@@ -25,13 +27,13 @@ export class AuthenticateUserUseCase{
         const user = await this.userRepository.findByEmail(email);
 
         if(!user){
-            throw new Error("Email or Password incorret");
+            throw new AppError("Email or Password incorret",401);
         }
 
         const isValidPassword = await compare(password, user.password);
 
         if(!isValidPassword){
-            throw new Error("Email or Password incorret");
+            throw new AppError("Email or Password incorret",401);
         }
       
         const token = sign(

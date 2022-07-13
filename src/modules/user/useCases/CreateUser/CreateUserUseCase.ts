@@ -4,6 +4,7 @@ import {hash} from 'bcryptjs';
 import { IUserRepository } from "@modules/user/repositories/IUserRepository";
 import { IMailProvider } from "@shared/providers/IMailProvider";
 import {inject, injectable} from "tsyringe";
+import { AppError } from "@shared/infra/http/errors/AppError";
 
 @injectable()
 export class CreateUserUseCase{
@@ -19,7 +20,7 @@ export class CreateUserUseCase{
         const userAlreadyExists = await this.userRepository.findByEmail(email); 
                 
         if(userAlreadyExists){
-            throw new Error("User already exists!!");
+            throw new AppError("User already exists!!",401);
         }
         const passwordHash = await hash(password,8);
         await this.userRepository.create({
