@@ -4,6 +4,8 @@ import { createConnection } from "@shared/infra/typeorm";
 import { router } from "@shared/infra/http/routes";
 import '@shared/container';
 import '@shared/infra/typeorm';
+import doteenv from 'dotenv';
+doteenv.config();
 
 createConnection();
 const app = express();

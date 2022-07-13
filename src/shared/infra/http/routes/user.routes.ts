@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { CreateUserController } from "@modules/user/useCases/CreateUser/CreateUseController";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
-const createUserController = new CreateUserController();
 
 const routerUser = Router();
+const createUserController = new CreateUserController();
 
-routerUser.post('/',createUserController.handle);
+routerUser.post('/',ensureAuthenticated, createUserController.handle);
 
 export {routerUser}
