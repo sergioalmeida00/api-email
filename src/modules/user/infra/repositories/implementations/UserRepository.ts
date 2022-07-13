@@ -11,6 +11,10 @@ export class UserRepository implements IUserRepository{
     constructor(){
         this.repository = dataSource.getRepository(User);
     }
+    async getAllUsers(): Promise<User[]> {
+        const users = await this.repository.find();
+        return users;
+    }
 
    async create({name,email,password}: ICreateUserRequestDTO): Promise<void> {
         const user = this.repository.create({name,email,password});
