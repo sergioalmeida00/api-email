@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 import {v4 as uuidV4} from 'uuid';
+import { Statement } from '../../../statements/infra/entities/Statement';
 
 @Entity('users')
 export class User {
@@ -15,6 +16,10 @@ export class User {
 
     @Column()
     public password:string;
+
+
+    @OneToMany(() => Statement, statement => statement.user)
+    statement: Statement[];
 
     @CreateDateColumn()
     public created_at:Date;
