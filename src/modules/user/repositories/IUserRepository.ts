@@ -5,6 +5,7 @@ interface IUserRepository{
     findByEmail(email:string): Promise<User>;
     create(user:ICreateUserRequestDTO): Promise<void>;
     getAllUsers():Promise<User[]>;
+    findByUserId(user_id:string): Promise<User | undefined>;
     
 }
 export {IUserRepository}

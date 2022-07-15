@@ -11,6 +11,10 @@ export class UserRepository implements IUserRepository{
     constructor(){
         this.repository = dataSource.getRepository(User);
     }
+    async findByUserId(user_id: string): Promise<User|undefined> {
+        const user = await this.repository.findOneBy({id:user_id});
+        return user!;     
+    }
     async getAllUsers(): Promise<User[]> {
         const users = await this.repository.find();
         return users;

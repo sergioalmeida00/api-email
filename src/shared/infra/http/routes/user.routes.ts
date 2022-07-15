@@ -8,6 +8,6 @@ const routerUser = Router();
 const createUserController = new CreateUserController();
 const getAllUserController = new GetAllUserController()
 
-routerUser.post('/', ensureAuthenticated,createUserController.handle);
+routerUser.post('/',createUserController.handle);
 routerUser.get('/all',ensureAuthenticated,getAllUserController.handle)
 export {routerUser}
