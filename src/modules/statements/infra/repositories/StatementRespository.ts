@@ -1,5 +1,6 @@
 import { ICreateStatementDTO } from "@modules/statements/dtos/CreateStatementDTO";
 import { IGetBalance } from "@modules/statements/dtos/IGetBalanceDTO";
+import { IGeteOperation } from "@modules/statements/dtos/IGetOperation";
 import { IStatementRepository } from "@modules/statements/repositories/IStatementRespository";
 import dataSource from "@shared/infra/typeorm";
 import { Repository } from "typeorm";
@@ -11,6 +12,18 @@ export class StatementRepository implements IStatementRepository{
     constructor(){
         this.repository = dataSource.getRepository(Statement);
     }
+
+    async getOperationStatement({ user_id, id_operation }: IGeteOperation): Promise<Statement> {
+        const resultOperation = await this.repository.findOne({
+            where:{
+                id: id_operation,
+                user_id: user_id
+            }
+        });
+
+        return resultOperation!;
+    }
+
     async getBalanceUser({user_id, with_statement = false}: IGetBalance): Promise<{ balance: number} | {balance:number, statement:Statement[]}> {
         const statementUser = await this.repository.find({
             where:{

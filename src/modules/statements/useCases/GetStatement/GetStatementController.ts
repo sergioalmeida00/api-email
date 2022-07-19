@@ -13,6 +13,5 @@ export class GetStatementController{
         const teste = BalanceMap.toDTO(result);        
         
         return response.status(201).json(teste);
-
     }
 }

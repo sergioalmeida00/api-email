@@ -38,7 +38,6 @@ export class CreateStatementUseCase{
             description,
             type
         });
-
         return statementOperation;
     }
 }
