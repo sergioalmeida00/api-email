@@ -11,7 +11,7 @@ export class StatementRepository implements IStatementRepository{
     constructor(){
         this.repository = dataSource.getRepository(Statement);
     }
-    async getBalanceUser({user_id}: IGetBalance): Promise<{ balance: number}> {
+    async getBalanceUser({user_id, with_statement = false}: IGetBalance): Promise<{ balance: number} | {balance:number, statement:Statement[]}> {
         const statementUser = await this.repository.find({
             where:{
                 user_id
@@ -19,26 +19,27 @@ export class StatementRepository implements IStatementRepository{
         });
         const balance = statementUser.reduce((acc, operation) => {
             if (operation.type === 'deposit') {                
-              return acc + operation.amount;
+              return acc + Number(operation.amount) ;
             } else {
-              return acc - operation.amount;
+              return acc - Number(operation.amount);
             }
-          }, 0);     
-        
-        return {balance}
+          }, 0);   
+          
+        if(with_statement){            
+            return { balance:Number(balance) , statement:statementUser }
+        }
+       
+        return {balance:Number(balance)}
     }
     
     async create({user_id,amount,description,type}: ICreateStatementDTO): Promise<Statement> {
-
         const createStatement = this.repository.create({
             user_id,
-            amount,
+            amount:Number(amount),
             description,
             type
         });
-
         await this.repository.save(createStatement);
-
         return createStatement;
     }
 

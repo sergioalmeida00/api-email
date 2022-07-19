@@ -22,8 +22,8 @@ export class CreateStatementUseCase{
         }
    
         if(type === 'withdraw'){
-            const {balance} = await this.statementRepository.getBalanceUser({user_id});
-            console.log(balance)
+            const { balance } = await this.statementRepository.getBalanceUser({user_id});
+      
             if(balance < amount){
                 throw new AppError("Insufficient!");
             }

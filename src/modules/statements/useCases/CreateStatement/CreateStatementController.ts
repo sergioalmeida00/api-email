@@ -23,7 +23,6 @@ export class CreateStatementController {
         description,
         type
        });
-    //    console.log(`Type: ${type} -- Valor: ${amount} -- Descrição: ${description}`)
        return response.status(201).json(resultUseCase);
     }
 }
