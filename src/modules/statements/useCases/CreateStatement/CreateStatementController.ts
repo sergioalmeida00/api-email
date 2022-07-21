@@ -10,7 +10,7 @@ enum OperationType {
 export class CreateStatementController {
     async handle(request:Request, response:Response):Promise<Response>{
         const id = request.userId;
-        const {amount, description} = request.body;
+        const {amount, description, id_category } = request.body;
 
         const urlPath = request.originalUrl.split('/');
         const type = urlPath[urlPath.length - 1] as OperationType ;
@@ -21,8 +21,10 @@ export class CreateStatementController {
         user_id:id,
         amount:Number(amount),
         description,
-        type
+        type,
+        id_category
        });
+       
        return response.status(201).json(resultUseCase);
     }
 }

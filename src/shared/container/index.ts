@@ -5,6 +5,8 @@ import { IMailProvider } from "@shared/providers/IMailProvider";
 import { MailtrapMailProvider } from "@shared/providers/implementations/MailtrapMailProvider";
 import { IStatementRepository } from "@modules/statements/repositories/IStatementRespository";
 import { StatementRepository } from "@modules/statements/infra/repositories/StatementRespository";
+import { ICategoryRepository } from "@modules/statements/repositories/ICategoryRepository";
+import { CategoryRepository } from "@modules/statements/infra/repositories/CategoryRepository";
 
 // IUserRepository
 container.registerSingleton<IUserRepository>(
@@ -22,4 +24,10 @@ container.registerSingleton<IMailProvider>(
 container.registerSingleton<IStatementRepository>(
     "StatementRepository",
     StatementRepository
+)
+
+// ICategory
+container.registerSingleton<ICategoryRepository>(
+    'CategoryRepository',
+    CategoryRepository
 )

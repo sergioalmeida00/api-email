@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 import {v4 as uuidV4} from 'uuid';
 import { User } from '../../../user/infra/entities/User';
+import { Category } from './Category';
 
 enum OperationType {
     DEPOSIT = 'deposit',
@@ -27,13 +28,20 @@ export class Statement{
 
     @ManyToOne(() => User, user => user.statement)
     @JoinColumn({ name: 'user_id' })
-    user: User;
+    user: User;   
 
     @CreateDateColumn()
     public created_at:Date;
 
     @UpdateDateColumn()
     public updated_at:Date;
+
+    @Column({type:'uuid'})
+    public id_category:string;
+
+    @ManyToOne(() => Category, category => category.statements)
+    @JoinColumn({name:'id_category'})
+    categories:Category[]
 
     constructor(props: Omit<Statement,'id'>, id?:string){
         Object.assign(this, props);

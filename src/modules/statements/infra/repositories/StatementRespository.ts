@@ -45,12 +45,13 @@ export class StatementRepository implements IStatementRepository{
         return {balance:Number(balance)}
     }
     
-    async create({user_id,amount,description,type}: ICreateStatementDTO): Promise<Statement> {
+    async create({user_id,amount,description,type,id_category}: ICreateStatementDTO): Promise<Statement> {
         const createStatement = this.repository.create({
             user_id,
             amount:Number(amount),
             description,
-            type
+            type,
+            id_category
         });
         await this.repository.save(createStatement);
         return createStatement;

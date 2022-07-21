@@ -21,7 +21,8 @@
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration:run": "ts-node-dev ./node_modules/typeorm/cli.js -d src/shared/infra/typeorm/index.ts migration:run",
     "migration:revert": "ts-node-dev ./node_modules/typeorm/cli.js -d src/shared/infra/typeorm/index.ts migration:revert",
-    "migration:create": "ts-node-dev ./node_modules/typeorm/cli.js -d src/shared/infra/typeorm/index.ts migration:create"
+    "migration:create": "ts-node-dev ./node_modules/typeorm/cli.js -d src/shared/infra/typeorm/index.ts migration:create",
+    "migration:generate": "ts-node-dev ./node_modules/typeorm/cli.js -d src/shared/infra/typeorm/index.ts migration:generate src/shared/infra/typeorm/migrations/default"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
