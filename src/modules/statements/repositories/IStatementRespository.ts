@@ -7,6 +7,7 @@ interface IStatementRepository{
     create(data:ICreateStatementDTO):Promise<Statement>;
     getBalanceUser(data:IGetBalance):Promise<{balance:number} | {balance: number, statement:Statement[]}>;    
     getOperationStatement({user_id,id_operation }:IGeteOperation):Promise<Statement>;
+    getStatementCategory(id_category:string, user_id:string):Promise<Statement[]>;
 }
 
 export {IStatementRepository}

@@ -57,5 +57,18 @@ export class StatementRepository implements IStatementRepository{
         return createStatement;
     }
 
+    async getStatementCategory(id_category: string, user_id:string): Promise<Statement[]> {
+
+        
+      const resultStatementCategory = await this.repository.find({
+        where:{
+            id_category:id_category,
+            user_id:user_id
+        }
+      });
+
+      return resultStatementCategory;
+    }
+
 
 }

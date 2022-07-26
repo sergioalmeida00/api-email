@@ -32,6 +32,7 @@ export class CreateStatementUseCase{
                 throw new AppError("Insufficient!");
             }
         }
+        
         if(amount < 0 ){
             throw new AppError('Value is negative!')
         }
