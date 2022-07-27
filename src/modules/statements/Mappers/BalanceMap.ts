@@ -8,12 +8,14 @@ export class BalanceMap{
             description,
             type,
             created_at,
+            id_category,            
         }) => ({
             id,
             amount:Number(amount),
             description,
             type,
             created_at,
+            id_category
         }));
 
         return { balance:Number(balance), statement: statementresult}

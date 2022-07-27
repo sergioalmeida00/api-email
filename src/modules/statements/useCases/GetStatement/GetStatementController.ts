@@ -9,8 +9,7 @@ export class GetStatementController{
         const getStatementUseCase = container.resolve(GetStatementUseCase);
         
         const result = await getStatementUseCase.execute({user_id});
-
-        const teste = BalanceMap.toDTO(result);        
+        const teste = BalanceMap.toDTO(result);    
         
         return response.status(201).json(teste);
     }

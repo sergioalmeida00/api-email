@@ -32,7 +32,7 @@ export class GetStatementUseCase{
         }
 
         const resultStatementuser = await this.statementRepository.getBalanceUser({user_id, with_statement:true});
-        // console.log(resultStatementuser.balance)
+        // console.log(resultStatementuser)
 
         return resultStatementuser as IResponse;
 

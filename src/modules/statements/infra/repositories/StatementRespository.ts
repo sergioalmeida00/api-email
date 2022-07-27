@@ -28,6 +28,9 @@ export class StatementRepository implements IStatementRepository{
         const statementUser = await this.repository.find({
             where:{
                 user_id
+            },
+            relations:{
+                categories:true
             }
         });
         const balance = statementUser.reduce((acc, operation) => {
@@ -58,15 +61,24 @@ export class StatementRepository implements IStatementRepository{
     }
 
     async getStatementCategory(id_category: string, user_id:string): Promise<Statement[]> {
-
         
-      const resultStatementCategory = await this.repository.find({
-        where:{
-            id_category:id_category,
-            user_id:user_id
-        }
-      });
+    //   const resultStatementCategory = await this.repository.find({
+    //     where:{
+    //         id_category:id_category,
+    //         user_id:user_id            
+    //     },
+    //     relations:{
+    //         categories:true,            
+    //     },   
+    //   });
 
+      const resultStatementCategory = await this.repository.createQueryBuilder('statements')
+        .innerJoinAndSelect("statements.categories",'categories')
+        .select(['amount','type','description','description_category'])
+        .where("statements.id_category = :id_category", {id_category:id_category})
+        .andWhere("statements.user_id = :user_id", {user_id: user_id})
+        .getRawMany();      
+        
       return resultStatementCategory;
     }
 
